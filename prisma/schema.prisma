@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model RefreshTokens {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id])
+  token      String
+  expireDate DateTime
+  userId     Int
+
+  @@map("refresh_tokens")
+  @@index([userId])
+}
+
+model User {
+  id             Int             @id @default(autoincrement())
+  name           String?
+  email          String          @unique
+  password       String
+  gender         Int?
+  division       Division        @relation(fields: [divisionId], references: [id])
+  role           Role            @default(USER)
+  refresh_tokens RefreshTokens[]
+  divisionId     Int
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@map("users")
+  @@index([divisionId])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Company {
+  id        Int      @id @default(autoincrement())
+  name      String
+  Branch    Branch[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("companies")
+}
+
+model Branch {
+  id        Int        @id @default(autoincrement())
+  name      String
+  address   String
+  company   Company    @relation(fields: [companyId], references: [id])
+  companyId Int
+  Division  Division[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@map("branchs")
+  @@index([companyId])
+}
+
+model Division {
+  id        Int      @id @default(autoincrement())
+  name      String
+  branch    Branch   @relation(fields: [branchId], references: [id])
+  User      User[]
+  branchId  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("divisions")
+  @@index([branchId])
+}
