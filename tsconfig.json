@@ -6,10 +6,12 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noImplicitAny": false
   },
   "include": [
     "src",
     "types"
-  ]
+  ],
+  "files":["src/@types/types.d.ts"]
 }
