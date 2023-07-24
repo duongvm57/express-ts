@@ -10,5 +10,4 @@ export const createCompanySchema = z.object({
     invalid_type_error: 'BusinessCode must be a string'
   }).max(255)
 });
-
 export type createCompanyInput = z.infer<typeof createCompanySchema>;

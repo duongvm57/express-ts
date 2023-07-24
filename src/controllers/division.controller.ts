@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
-import companyService from '../services/company.service';
 import BaseController from './base.controller';
+import divisionService from '../services/division.service';
 
-class CompanyController extends BaseController {
+class DivisionController extends BaseController {
 
   async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await companyService.getAll();
+      const result = await divisionService.getAll();
       super.jsonResponse(res, 200, result);
     } catch (error: any) {
       next(error);
@@ -15,7 +15,7 @@ class CompanyController extends BaseController {
 
   async get(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await companyService.get({ params: req.params, query: req.query });
+      const result = await divisionService.get({ params: req.params, query: req.query });
       super.jsonResponse(res, 200, result);
     } catch (error: any) {
       next(error);
@@ -24,7 +24,7 @@ class CompanyController extends BaseController {
 
   async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await companyService.create(req.body);
+      const result = await divisionService.create(req.body);
       super.jsonResponse(res, 200, result);
     } catch (error: any) {
       next(error);
@@ -33,7 +33,7 @@ class CompanyController extends BaseController {
 
   async update(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await companyService.update({ params: req.params, body: req.body });
+      const result = await divisionService.update({ params: req.params, body: req.body });
       super.jsonResponse(res, 200, result);
     } catch (error: any) {
       next(error);
@@ -41,4 +41,4 @@ class CompanyController extends BaseController {
   }
 }
 
-export default new CompanyController();
+export default new DivisionController();

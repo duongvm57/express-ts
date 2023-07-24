@@ -14,7 +14,7 @@ class AuthService {
 
     const existedUser = await db.user.findFirst({
       where: {
-        email: data.email
+        email: dataInput.email
       }
     });
 
@@ -22,7 +22,7 @@ class AuthService {
       throw ({ status: 409, message: 'User already exists.' });
     }
 
-    const encryptedPassword = bcrypt.hashSync(data.password, 8);
+    const encryptedPassword = bcrypt.hashSync(dataInput.password, 8);
     dataInput.password = encryptedPassword;
 
     await db.user.create({
@@ -30,7 +30,7 @@ class AuthService {
     });
 
     return {
-      message: 'Create user success.'
+      message: 'Create user successfully.'
     };
   }
 
@@ -56,8 +56,7 @@ class AuthService {
       {
         id: user.id,
         name: user.name,
-        email: user.email,
-        role: user.role
+        email: user.email
       },
       String(process.env.JWT_SECRET),
       {
@@ -70,6 +69,7 @@ class AuthService {
     return {
       name: user.name,
       email: user.email,
+      role: user.role,
       accessToken: accessToken,
       refreshToken: refreshToken
     };
@@ -108,8 +108,7 @@ class AuthService {
       {
         id: refreshToken.user.id,
         name: refreshToken.user.name,
-        email: refreshToken.user.email,
-        role: refreshToken.user.role
+        email: refreshToken.user.email
       },
       String(process.env.JWT_SECRET),
       {

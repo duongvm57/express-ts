@@ -15,8 +15,8 @@ model RefreshTokens {
   expireDate DateTime
   userId     Int
 
-  @@map("refresh_tokens")
   @@index([userId])
+  @@map("refresh_tokens")
 }
 
 model User {
@@ -32,48 +32,51 @@ model User {
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
 
-  @@map("users")
   @@index([divisionId])
+  @@map("users")
 }
 
 enum Role {
   USER
   ADMIN
+  SUPERADMIN
 }
 
 model Company {
-  id        Int      @id @default(autoincrement())
-  name      String
-  Branch    Branch[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  name         String
+  businessCode String   @unique
+  Branch       Branch[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@map("companies")
 }
 
 model Branch {
-  id        Int        @id @default(autoincrement())
-  name      String
-  address   String
-  company   Company    @relation(fields: [companyId], references: [id])
-  companyId Int
-  Division  Division[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id         Int        @id @default(autoincrement())
+  name       String
+  branchCode String     @unique
+  address    String
+  company    Company    @relation(fields: [companyId], references: [id])
+  companyId  Int
+  Division   Division[]
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
 
-  @@map("branchs")
   @@index([companyId])
+  @@map("branchs")
 }
 
 model Division {
   id        Int      @id @default(autoincrement())
-  name      String
+  name      String   @unique
   branch    Branch   @relation(fields: [branchId], references: [id])
   User      User[]
   branchId  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("divisions")
   @@index([branchId])
+  @@map("divisions")
 }

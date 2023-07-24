@@ -21,3 +21,14 @@ export const LoginSchema = z.object({
   password: z.string().min(6)
 });
 export type LoginInput = z.infer<typeof LoginSchema>;
+
+export const updateUserSchema = z.object({
+  name: z.string().nonempty().optional(),
+  password: z.string({
+    required_error: 'Password is required'
+  }).min(6).optional(),
+  gender: z.number({
+    invalid_type_error: 'Gender must be a number'
+  }).optional()
+});
+export type UpdateUserInput = z.infer<typeof updateUserSchema>;

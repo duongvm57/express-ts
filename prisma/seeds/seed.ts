@@ -1,3 +1,4 @@
+import { Gender } from './../../src/constants/constant';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 
@@ -5,13 +6,26 @@ const prisma = new PrismaClient();
 
 async function main() {
 
+  await prisma.user.create({
+    data: {
+      name: 'duongvm',
+      email: 'duongvm@yopmail.com',
+      password: bcrypt.hashSync('12345678', 8),
+      gender: Gender.MALE,
+      divisionId: 0,
+      role: 'SUPERADMIN',
+    }
+  });
+
   await prisma.company.create({
     data: {
       name: 'Company A',
+      businessCode: 'companya',
       Branch: {
         create: [
           {
             name: 'Branch A of company A',
+            branchCode: 'CPABA',
             address: 'Address AA',
             Division: {
               create: [
@@ -62,6 +76,7 @@ async function main() {
           },
           {
             name: 'Branch B of company A',
+            branchCode: 'CPABB',
             address: 'Address BA',
             Division: {
               create: [
@@ -118,15 +133,17 @@ async function main() {
   await prisma.company.create({
     data: {
       name: 'Company B',
+      businessCode: 'companyb',
       Branch: {
         create: [
           {
             name: 'Branch A of company B',
+            branchCode: 'CPBBA',
             address: 'Address AB',
             Division: {
               create: [
                 {
-                  name: 'Division 1',
+                  name: 'Division 5',
                   User: {
                     create: [
                       {
@@ -147,7 +164,7 @@ async function main() {
                   },
                 },
                 {
-                  name: 'Division 2',
+                  name: 'Division 6',
                   User: {
                     create: [
                       {
@@ -172,11 +189,12 @@ async function main() {
           },
           {
             name: 'Branch B of company B',
+            branchCode: 'CPBBB',
             address: 'Address BB',
             Division: {
               create: [
                 {
-                  name: 'Division 1',
+                  name: 'Division 7',
                   User: {
                     create: [
                       {
@@ -197,7 +215,7 @@ async function main() {
                   },
                 },
                 {
-                  name: 'Division 2',
+                  name: 'Division 8',
                   User: {
                     create: [
                       {

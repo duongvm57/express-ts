@@ -21,9 +21,9 @@ class UserController extends BaseController {
     }
   }
 
-  async profile(req: Request, res: Response, next: NextFunction) {
+  async update(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await userService.profile(req.params);
+      const result = await userService.update({ params: req.params, body: req.body });
       super.jsonResponse(res, 200, result);
     } catch (error: any) {
       next(error);
