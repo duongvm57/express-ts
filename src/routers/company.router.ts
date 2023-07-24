@@ -1,9 +1,9 @@
 import express from 'express';
-import CompanyController from '../controllers/company.controller';
+import companyController from '../controllers/company.controller';
 
 const companyRouter = express.Router();
 
-companyRouter.get('/', CompanyController.getAll);
-companyRouter.get('/:companyId', CompanyController.get);
+companyRouter.get('/', companyController.getAll);
+companyRouter.get('/:companyId', companyController.get);
 
 export default companyRouter;

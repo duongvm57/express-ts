@@ -54,6 +54,7 @@ class AuthService {
 
     const accessToken = jwt.sign(
       {
+        id: user.id,
         name: user.name,
         email: user.email,
         role: user.role
@@ -105,6 +106,7 @@ class AuthService {
 
     const newAccessToken = jwt.sign(
       {
+        id: refreshToken.user.id,
         name: refreshToken.user.name,
         email: refreshToken.user.email,
         role: refreshToken.user.role
