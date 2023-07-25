@@ -5,7 +5,7 @@ import BaseController from './base.controller';
 class UserController extends BaseController {
   async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await userService.getAll();
+      const result = await userService.getAll(req.user);
       super.jsonResponse(res, 200, result);
     } catch (error: any) {
       next(error);
@@ -23,7 +23,7 @@ class UserController extends BaseController {
 
   async update(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await userService.update({ params: req.params, body: req.body });
+      const result = await userService.update({ params: req.params, body: req.body, currentUser: req.user });
       super.jsonResponse(res, 200, result);
     } catch (error: any) {
       next(error);

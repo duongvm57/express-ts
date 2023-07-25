@@ -87,6 +87,15 @@ class DivisionService {
       message: 'Update division successfully.'
     };
   }
+
+  async findById(id: number) {
+    const division = await db.division.findFirst({
+      where: { id }
+    });
+    if (!division) {
+      throw ({ status: 404, message: 'Division not found.' });
+    }
+  }
 }
 
 export default new DivisionService();

@@ -27,6 +27,7 @@ model User {
   gender         Int?
   division       Division        @relation(fields: [divisionId], references: [id])
   role           Role            @default(USER)
+  status         Status          @default(ACTIVE)
   refresh_tokens RefreshTokens[]
   divisionId     Int
   createdAt      DateTime        @default(now())
@@ -40,6 +41,11 @@ enum Role {
   USER
   ADMIN
   SUPERADMIN
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
 }
 
 model Company {

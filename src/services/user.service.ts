@@ -1,6 +1,8 @@
 import { updateUserSchema } from '../schema/user.schema';
 import { db } from '../utils/db.config';
 import validate from '../utils/validate';
+import divisionService from './division.service';
+import userService from './user.service';
 
 class UserSerivce {
   selectedFields = {
@@ -14,8 +16,16 @@ class UserSerivce {
     updatedAt: true,
   };
 
-  async getAll() {
+  async getAll(currentUser: any) {
+    const currentCompany = await userService.getCompanyByUserId(currentUser.id);
     return await db.user.findMany({
+      where: {
+        division: {
+          branch: {
+            companyId: currentCompany.id
+          }
+        }
+      },
       select: this.selectedFields,
     });
   }
@@ -79,14 +89,29 @@ class UserSerivce {
   async update(data: any) {
     const { userId } = data.params;
     const dataInput = validate(updateUserSchema, data.body);
-    const existedUser = await db.company.findFirst({
+    const existedUser = await db.user.findFirst({
       where: {
         id: Number(userId)
       }
     });
+
     if (!existedUser) {
       throw ({ status: 409, message: 'User not found.' });
     }
+
+    // check permision to update role, stutus, division
+    const { role, status, divisionId } = dataInput;
+    const currentUser = data.currentUser;
+    const currentRole = await this.getRoleByUserId(currentUser.id);
+    if (role || status || divisionId) {
+      if (currentRole != 'ADMIN') {
+        throw ({ status: 409, message: 'Forbidden: Access denied, you can not update role, status and division' });
+      }
+      if (divisionId) {
+        await divisionService.findById(divisionId);
+      }
+    }
+
     await db.user.update({
       where: {
         id: Number(userId)

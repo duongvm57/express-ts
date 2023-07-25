@@ -6,6 +6,8 @@ import { RefreshTokens, User } from '@prisma/client';
 import { CreateUserInput, createUserSchema, LoginInput, LoginSchema } from '../schema/user.schema';
 import { RefreshTokenInput, RefreshTokenSchema } from '../schema/refreshToken.schema';
 import validate from '../utils/validate';
+import { Status } from '../constants/constant';
+import divisionService from './division.service';
 
 class AuthService {
 
@@ -22,6 +24,7 @@ class AuthService {
       throw ({ status: 409, message: 'User already exists.' });
     }
 
+    await divisionService.findById(dataInput.divisionId);
     const encryptedPassword = bcrypt.hashSync(dataInput.password, 8);
     dataInput.password = encryptedPassword;
 
@@ -39,7 +42,8 @@ class AuthService {
 
     const user = await db.user.findFirst({
       where: {
-        email: dataInput.email
+        email: dataInput.email,
+        status: Status.ACTIVE
       }
     });
 

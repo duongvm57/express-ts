@@ -2,7 +2,7 @@ FROM node:18-alpine AS dev
 WORKDIR /usr/src/app
 COPY --chown=node:node package*.json ./
 COPY --chown=node:node . .
-RUN npm i
+RUN npm i && chown -R node:node node_modules
 USER node
 EXPOSE 3000
 CMD [ "npm", "run", "dev" ]
@@ -12,7 +12,7 @@ WORKDIR /usr/src/app
 COPY --chown=node:node package*.json ./
 COPY . ./
 COPY --chown=node:node . .
-RUN npm i --only=production
+RUN npm i --only=production && chown -R node:node node_modules
 USER node
 EXPOSE 3000
 RUN npm run build

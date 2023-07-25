@@ -12,7 +12,9 @@ export const createUserSchema = z.object({
   gender: z.number({
     invalid_type_error: 'Gender must be a number'
   }),
-  role: z.enum(['USER', 'ADMIN'])
+  divisionId: z.number({
+    invalid_type_error: 'Division id must be a number'
+  })
 });
 export type CreateUserInput = z.infer<typeof createUserSchema>;
 
@@ -24,11 +26,13 @@ export type LoginInput = z.infer<typeof LoginSchema>;
 
 export const updateUserSchema = z.object({
   name: z.string().nonempty().optional(),
-  password: z.string({
-    required_error: 'Password is required'
-  }).min(6).optional(),
   gender: z.number({
     invalid_type_error: 'Gender must be a number'
-  }).optional()
+  }).optional(),
+  divisionId: z.number({
+    invalid_type_error: 'Division id must be a number'
+  }).optional(),
+  role: z.enum(['ADMIN', 'USER']).optional(),
+  status: z.enum(['ACTIVE', 'INACTIVE']).optional()
 });
 export type UpdateUserInput = z.infer<typeof updateUserSchema>;

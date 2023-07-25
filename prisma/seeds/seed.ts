@@ -14,6 +14,7 @@ async function main() {
       gender: Gender.MALE,
       divisionId: 0,
       role: 'SUPERADMIN',
+      status: 'ACTIVE'
     }
   });
 
@@ -39,6 +40,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 1,
                         role: 'ADMIN',
+                        status: 'ACTIVE'
                       },
                       {
                         name: 'User 2',
@@ -46,6 +48,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 2,
                         role: 'USER',
+                        status: 'ACTIVE'
                       },
                     ],
                   },
@@ -60,6 +63,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 1,
                         role: 'ADMIN',
+                        status: 'ACTIVE'
                       },
                       {
                         name: 'User 4',
@@ -67,6 +71,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 2,
                         role: 'USER',
+                        status: 'ACTIVE'
                       },
                     ],
                   },
@@ -90,6 +95,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 1,
                         role: 'USER',
+                        status: 'ACTIVE'
                       },
                       {
                         name: 'User 6',
@@ -97,6 +103,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 2,
                         role: 'USER',
+                        status: 'ACTIVE'
                       },
                     ],
                   },
@@ -111,6 +118,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 1,
                         role: 'USER',
+                        status: 'ACTIVE'
                       },
                       {
                         name: 'User 8',
@@ -118,6 +126,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 2,
                         role: 'USER',
+                        status: 'ACTIVE'
                       },
                     ],
                   },
@@ -152,6 +161,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 1,
                         role: 'USER',
+                        status: 'ACTIVE'
                       },
                       {
                         name: 'User 10',
@@ -159,6 +169,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 2,
                         role: 'USER',
+                        status: 'ACTIVE'
                       },
                     ],
                   },
@@ -173,6 +184,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 1,
                         role: 'USER',
+                        status: 'ACTIVE'
                       },
                       {
                         name: 'User 12',
@@ -180,6 +192,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 2,
                         role: 'USER',
+                        status: 'ACTIVE'
                       },
                     ],
                   },
@@ -203,6 +216,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 1,
                         role: 'USER',
+                        status: 'ACTIVE'
                       },
                       {
                         name: 'User 14',
@@ -210,6 +224,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 2,
                         role: 'USER',
+                        status: 'ACTIVE'
                       },
                     ],
                   },
@@ -224,6 +239,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 1,
                         role: 'USER',
+                        status: 'ACTIVE'
                       },
                       {
                         name: 'User 16',
@@ -231,6 +247,7 @@ async function main() {
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 2,
                         role: 'USER',
+                        status: 'INACTIVE'
                       },
                     ],
                   },

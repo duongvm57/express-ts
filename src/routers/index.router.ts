@@ -13,6 +13,6 @@ router.use('/auth', authRouter);
 router.use('/users', authenticateToken, userRouter);
 router.use('/companies', authenticateToken, checkSuperAdminRole, companyRouter);
 router.use('/branchs', authenticateToken, checkAdminRole, branchRouter);
-router.use('/divisions', authenticateToken, checkAdminRole, divisionRouter);
+router.use('/divisions', authenticateToken, divisionRouter);
 
 export { router as default };
