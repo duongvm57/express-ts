@@ -89,7 +89,7 @@ async function main() {
                         email: 'user5@example.com',
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 1,
-                        role: 'ADMIN',
+                        role: 'USER',
                       },
                       {
                         name: 'User 6',
@@ -110,7 +110,7 @@ async function main() {
                         email: 'user7@example.com',
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 1,
-                        role: 'ADMIN',
+                        role: 'USER',
                       },
                       {
                         name: 'User 8',
@@ -151,7 +151,7 @@ async function main() {
                         email: 'user9@example.com',
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 1,
-                        role: 'ADMIN',
+                        role: 'USER',
                       },
                       {
                         name: 'User 10',
@@ -172,7 +172,7 @@ async function main() {
                         email: 'user11@example.com',
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 1,
-                        role: 'ADMIN',
+                        role: 'USER',
                       },
                       {
                         name: 'User 12',
@@ -202,7 +202,7 @@ async function main() {
                         email: 'user13@example.com',
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 1,
-                        role: 'ADMIN',
+                        role: 'USER',
                       },
                       {
                         name: 'User 14',
@@ -223,7 +223,7 @@ async function main() {
                         email: 'user15@example.com',
                         password: bcrypt.hashSync('12345678', 8),
                         gender: 1,
-                        role: 'ADMIN',
+                        role: 'USER',
                       },
                       {
                         name: 'User 16',
