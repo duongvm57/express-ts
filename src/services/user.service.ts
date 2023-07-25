@@ -134,6 +134,14 @@ class UserSerivce {
     });
     return user.role;
   }
+
+  async delete(data: any) {
+    const { userId } = data;
+    await db.user.delete({ where: { id: Number(userId) } });
+    return {
+      message: 'Delete user successfully.'
+    };
+  }
 }
 
 export default new UserSerivce();

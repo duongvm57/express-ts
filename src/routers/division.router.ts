@@ -8,5 +8,6 @@ divisionRouter.get('/', divisionController.getAll);
 divisionRouter.get('/:divisionId', divisionController.get);
 divisionRouter.post('/', checkAdminRole, divisionController.create);
 divisionRouter.put('/:divisionId', checkAdminRole, divisionController.update);
+divisionRouter.delete('/:divisionId', checkAdminRole, divisionController.delete);
 
 export default divisionRouter;

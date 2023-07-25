@@ -97,6 +97,14 @@ class BranchService {
       message: 'Update branch successfully.'
     };
   }
+
+  async delete(data: any) {
+    const { branchId } = data;
+    await db.branch.delete({ where: { id: Number(branchId) } });
+    return {
+      message: 'Delete branch successfully.'
+    };
+  }
 }
 
 export default new BranchService();

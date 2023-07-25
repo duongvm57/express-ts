@@ -96,6 +96,14 @@ class DivisionService {
       throw ({ status: 404, message: 'Division not found.' });
     }
   }
+
+  async delete(data: any) {
+    const { divisionId } = data;
+    await db.division.delete({ where: { id: Number(divisionId) } });
+    return {
+      message: 'Delete division successfully.'
+    };
+  }
 }
 
 export default new DivisionService();

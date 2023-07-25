@@ -39,6 +39,15 @@ class DivisionController extends BaseController {
       next(error);
     }
   }
+
+  async delete(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await divisionService.delete(req.params);
+      super.jsonResponse(res, 200, result);
+    } catch (error: any) {
+      next(error);
+    }
+  }
 }
 
 export default new DivisionController();

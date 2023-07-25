@@ -7,5 +7,6 @@ const userRouter = express.Router();
 userRouter.get('/', checkAdminRole, userController.getAll);
 userRouter.get('/:userId', checkProfileAccess, userController.get);
 userRouter.put('/:userId', checkProfileAccess, userController.update);
+userRouter.delete('/:userId', checkProfileAccess, userController.delete);
 
 export default userRouter;
