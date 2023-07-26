@@ -99,6 +99,19 @@ class DivisionService {
 
   async delete(data: any) {
     const { divisionId } = data;
+    await db.division.update({
+      where: {
+        id: Number(divisionId),
+      },
+      data: {
+        User: {
+          deleteMany: {},
+        },
+      },
+      include: {
+        User: true,
+      }
+    });
     await db.division.delete({ where: { id: Number(divisionId) } });
     return {
       message: 'Delete division successfully.'

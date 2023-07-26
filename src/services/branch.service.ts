@@ -98,9 +98,52 @@ class BranchService {
     };
   }
 
+  async getDivisionByBranch(branchId: number) {
+    const branch = await db.branch.findFirst({
+      where: {
+        id: Number(branchId)
+      },
+      include: {
+        Division: {
+          select: {
+            id: true,
+            name: true
+          }
+        },
+      }
+    });
+    return branch?.Division;
+  }
+
   async delete(data: any) {
     const { branchId } = data;
+    const divisions = await this.getDivisionByBranch(branchId);
+    const divisionIds : number[] = divisions ? divisions.map((item) => item.id) : [];
+    
+    await db.division.updateMany({
+      where: {
+        id: {
+          in: divisionIds
+        }
+      },
+      data: {
+        deletedAt: new Date(),
+      }
+    });
+
+    await db.user.updateMany({
+      where: {
+        divisionId: {
+          in: divisionIds
+        }
+      },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
     await db.branch.delete({ where: { id: Number(branchId) } });
+
     return {
       message: 'Delete branch successfully.'
     };
