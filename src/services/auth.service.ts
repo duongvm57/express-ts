@@ -1,13 +1,14 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { v4 as uuidv4 } from 'uuid';
-import { db } from '../utils/db.config';
-import { RefreshTokens, User } from '@prisma/client';
-import { CreateUserInput, createUserSchema, LoginInput, LoginSchema } from '../schema/user.schema';
-import { RefreshTokenInput, RefreshTokenSchema } from '../schema/refreshToken.schema';
+import {v4 as uuidv4} from 'uuid';
+import {db} from '../utils/db.config';
+import {RefreshTokens, User} from '@prisma/client';
+import {CreateUserInput, createUserSchema, LoginInput, LoginSchema} from '../schema/user.schema';
+import {RefreshTokenInput, RefreshTokenSchema} from '../schema/refreshToken.schema';
 import validate from '../utils/validate';
-import { Status } from '../constants/constant';
+import {Status} from '../constants/constant';
 import divisionService from './division.service';
+import {sendmail} from './mail.service';
 
 class AuthService {
 
@@ -25,12 +26,23 @@ class AuthService {
     }
 
     await divisionService.findById(dataInput.divisionId);
-    const encryptedPassword = bcrypt.hashSync(dataInput.password, 8);
-    dataInput.password = encryptedPassword;
+    dataInput.password = bcrypt.hashSync(dataInput.password, 8);
 
     await db.user.create({
       data: dataInput
     });
+
+    const subject = 'Hello world';
+    const body = `
+                <h3>You've got a new contact request</h3>
+                <h5>Contact Details</h5>
+                <ul>
+                  <li>Contact Name : ${dataInput.name}</li>
+                  <li>Contact E-mail : ${dataInput.email}</li>
+                  <li>Message : Hello hehehe</li>
+                </ul>
+              `;
+    sendmail(subject, body, dataInput.email);
 
     return {
       message: 'Create user successfully.'
